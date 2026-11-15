@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101713">
+  <title>កម្មវិធីគណនាតម្លៃ និងការលក់ | វ៉ន ដារ៉ា</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section class="intro" id="intro" aria-label="ស្វាគមន៍" data-i18n-aria-label="welcome">
+    <div class="intro-content">
+      <span class="dragon-mark" aria-hidden="true">🐉</span>
+      <h1 id="introName">វ៉ន ដារ៉ា</h1>
+      <p data-i18n="introCredit">អ្នកបង្កើត · Dragon Calculator</p>
+      <button class="skip-intro" id="skipIntro" type="button" data-i18n="skipIntro">ចូលប្រើម៉ាស៊ីនគិតលេខ</button>
+    </div>
+  </section>
+
+  <main class="calculator" aria-label="កម្មវិធីគណនាតម្លៃ និងការលក់" data-i18n-aria-label="mainLabel">
+    <header class="brand">
+      <span class="brand-name">
+        <span class="brand-icon" aria-hidden="true">🐉</span>
+        <span class="brand-copy"><strong id="brandName">វ៉ន ដារ៉ា</strong><small data-i18n="brandTagline">ភាពអាចទៅរួច</small></span>
+      </span>
+      <button class="about-button" id="aboutButton" type="button" aria-haspopup="dialog">
+        <span class="info-icon" aria-hidden="true">i</span>
+        <span data-i18n="aboutButton">អំពីកម្មវិធី</span>
+      </button>
+    </header>
+
+    <div class="workspace-heading">
+      <div class="workspace-copy">
+        <span class="eyebrow" data-i18n="workspaceEyebrow">ផ្ទាំងគ្រប់គ្រងសម្រាប់ការលក់</span>
+        <h1 data-i18n="workspaceTitle">ឧបករណ៍គណនាសម្រាប់អាជីវកម្ម</h1>
+        <p data-i18n="workspaceDescription">គណនាតម្លៃលក់ ការបញ្ចុះ និងលទ្ធផលប្រចាំថ្ងៃរបស់អ្នក</p>
+      </div>
+      <div class="language-switch" role="group" aria-label="ជ្រើសរើសភាសា" data-i18n-aria-label="languageSelect">
+        <button class="language-button active" type="button" data-language="km" aria-pressed="true">ខ្មែរ</button>
+        <button class="language-button" type="button" data-language="en" aria-pressed="false">English</button>
+      </div>
+    </div>
+
+    <div class="tool-tabs" role="tablist" aria-label="ប្រភេទមុខងារ" data-i18n-aria-label="toolTabList">
+      <button class="tool-tab active" id="discountTab" type="button" role="tab" aria-selected="true" aria-controls="discountPanel">
+        <span class="tab-icon" aria-hidden="true">％</span>
+        <span class="tab-copy"><span data-i18n="discountTab">បញ្ចុះតម្លៃ</span><small data-i18n="discountTabNote">Discount price</small></span>
+      </button>
+      <button class="tool-tab" id="targetTab" type="button" role="tab" aria-selected="false" aria-controls="targetPanel">
+        <span class="tab-icon" aria-hidden="true">◎</span>
+        <span class="tab-copy"><span data-i18n="targetTab">គោលដៅលក់</span><small data-i18n="targetTabNote">Sales target</small></span>
+      </button>
+      <button class="tool-tab" id="profitTab" type="button" role="tab" aria-selected="false" aria-controls="profitPanel">
+        <span class="tab-icon" aria-hidden="true">↗</span>
+        <span class="tab-copy"><span data-i18n="profitTab">ចំណេញ/ខាត</span><small data-i18n="profitTabNote">Profit &amp; loss</small></span>
+      </button>
+    </div>
+
+    <section class="tool-panel" id="discountPanel" role="tabpanel" aria-labelledby="discountTab">
+      <h2 data-i18n="discountHeading">គណនាតម្លៃក្រោយបញ្ចុះ</h2>
+      <p class="section-description" data-i18n="discountDescription">បញ្ចូលតម្លៃដើម និងភាគរយបញ្ចុះតម្លៃ</p>
+      <form class="tool-form" id="discountForm">
+        <label class="field">
+          <span data-i18n="originalPrice">តម្លៃដើម ($)</span>
+          <input id="originalPrice" type="number" min="0" step="any" value="50" inputmode="decimal" required>
+        </label>
+        <label class="field">
+          <span data-i18n="discountRate">បញ្ចុះតម្លៃ (%)</span>
+          <input id="discountRate" type="number" min="0" max="100" step="any" value="50" inputmode="decimal" required>
+        </label>
+      </form>
+      <div class="result-card" aria-live="polite" aria-atomic="true">
+        <span class="result-label" data-i18n="discountResultLabel">តម្លៃក្រោយបញ្ចុះ</span>
+        <strong class="result-value" id="discountedPrice">$25</strong>
+        <span class="result-detail" id="discountDetail">បញ្ចុះតម្លៃបាន $25</span>
+        <div class="calculation-step">
+          <span data-i18n="calculationLabel">របៀបគណនា</span>
+          <code id="discountCalculation">$50 × 50% = $25 បញ្ចុះ; $50 − $25 = $25</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-panel" id="targetPanel" role="tabpanel" aria-labelledby="targetTab" hidden>
+      <h2 data-i18n="targetHeading">គណនាភាគរយសម្រេចគោលដៅលក់</h2>
+      <p class="section-description" data-i18n="targetDescription">ប្រៀបធៀបការលក់ជាក់ស្តែងជាមួយគោលដៅ</p>
+      <form class="tool-form" id="targetForm">
+        <label class="field">
+          <span data-i18n="salesTarget">គោលដៅលក់ ($)</span>
+          <input id="salesTarget" type="number" min="0.01" step="any" value="50000" inputmode="decimal" required>
+        </label>
+        <label class="field">
+          <span data-i18n="actualSales">លក់បាន ($)</span>
+          <input id="actualSales" type="number" min="0" step="any" value="40000" inputmode="decimal" required>
+        </label>
+      </form>
+      <div class="result-card" aria-live="polite" aria-atomic="true">
+        <span class="result-label" data-i18n="targetResultLabel">សម្រេចបាន</span>
+        <strong class="result-value" id="targetPercent">80%</strong>
+        <div class="progress-track" role="progressbar" aria-label="សម្រេចគោលដៅ" data-i18n-aria-label="progressLabel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">
+          <div class="progress-fill" id="targetProgress"></div>
+        </div>
+        <span class="result-detail" id="targetDetail">នៅសល់ $10,000 ដើម្បីដល់គោលដៅ</span>
+        <div class="calculation-step">
+          <span data-i18n="calculationLabel">របៀបគណនា</span>
+          <code id="targetCalculation">$40,000 ÷ $50,000 × 100 = 80%</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-panel" id="profitPanel" role="tabpanel" aria-labelledby="profitTab" hidden>
+      <h2 data-i18n="profitHeading">គណនាចំណេញ ឬខាតក្រោយបញ្ចុះ</h2>
+      <p class="section-description" data-i18n="profitDescription">ប្រៀបធៀបតម្លៃលក់ក្រោយបញ្ចុះនឹងតម្លៃទិញចូល</p>
+      <form class="tool-form" id="profitForm">
+        <label class="field">
+          <span data-i18n="purchasePrice">តម្លៃទិញចូល ($)</span>
+          <input id="purchasePrice" type="number" min="0" step="0.01" value="50" inputmode="decimal" required>
+        </label>
+        <label class="field">
+          <span data-i18n="salePrice">តម្លៃលក់ចេញ ($)</span>
+          <input id="salePrice" type="number" min="0" step="0.01" value="60" inputmode="decimal" required>
+        </label>
+        <fieldset class="discount-mode">
+          <legend data-i18n="discountMode">ជ្រើសរើសរបៀបបញ្ចុះ</legend>
+          <label class="mode-option selected">
+            <input type="radio" name="profitDiscountType" value="percent" checked>
+            <span class="mode-symbol">%</span>
+            <span class="mode-copy"><strong data-i18n="percentMode">ភាគរយ</strong><small data-i18n="percentModeExample">ឧ. បញ្ចុះ 50%</small></span>
+          </label>
+          <label class="mode-option">
+            <input type="radio" name="profitDiscountType" value="amount">
+            <span class="mode-symbol">$</span>
+            <span class="mode-copy"><strong data-i18n="amountMode">ចំនួនដុល្លារ</strong><small data-i18n="amountModeExample">ឧ. បញ្ចុះ $30</small></span>
+          </label>
+        </fieldset>
+        <label class="field" id="profitPercentField">
+          <span data-i18n="profitPercentLabel">បញ្ចុះតម្លៃ (%)</span>
+          <input id="profitDiscountRate" type="number" min="0" max="100" step="any" value="50" inputmode="decimal" required>
+        </label>
+        <label class="field" id="profitAmountField" hidden>
+          <span data-i18n="profitAmountLabel">បញ្ចុះតម្លៃ ($)</span>
+          <input id="profitDiscountAmount" type="number" min="0" max="60" step="0.01" value="30" inputmode="decimal" disabled required>
+        </label>
+      </form>
+      <div class="result-card" aria-live="polite" aria-atomic="true">
+        <span class="result-label" data-i18n="profitResultLabel">លទ្ធផលក្រោយបញ្ចុះ</span>
+        <strong class="result-value loss" id="profitLossResult">ខាត $20</strong>
+        <span class="result-detail" id="profitSalePrice">តម្លៃលក់ក្រោយបញ្ចុះ៖ $30</span>
+        <div class="calculation-step">
+          <span data-i18n="calculationLabel">របៀបគណនា</span>
+          <code id="profitCalculation">$60 × (1 − 50%) = $30; $30 − $50 = −$20 (ខាត $20)</code>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="about-dialog" id="aboutDialog" aria-labelledby="aboutTitle">
+    <header class="about-header">
+      <div>
+        <span class="eyebrow" data-i18n="aboutEyebrow">អំពីកម្មវិធីនេះ</span>
+        <h2 id="aboutTitle" data-i18n="aboutTitle">អំពីកម្មវិធី</h2>
+      </div>
+      <button class="dialog-close" id="closeAbout" type="button" aria-label="បិទ" data-i18n-aria-label="close">×</button>
+    </header>
+    <div class="about-content">
+      <p data-i18n="aboutParagraph1">ខ្ញុំបាទឈ្មោះ វ៉ន ដារ៉ា មិនមែនជាអ្នកជំនាញផ្នែក IT ឬជាអ្នកអភិវឌ្ឍន៍គេហទំព័រអាជីពនោះទេ។ គេហទំព័រតូចមួយនេះ ត្រូវបានបង្កើតឡើងដោយផ្អែកលើចំណង់ចំណូលចិត្ត ការចង់ចេះចង់ដឹង និងបំណងប្រាថ្នាចង់ស្វែងយល់អ្វីថ្មីៗរបស់ខ្ញុំប៉ុណ្ណោះ។</p>
+      <p data-i18n="aboutParagraph2">ខ្ញុំជឿថា ការរៀនសូត្រមិនចាំបាច់ចាប់ផ្ដើមពីភាពជាអ្នកជំនាញនោះទេ ប៉ុន្តែអាចចាប់ផ្ដើមពីការចង់ដឹង ការហ៊ានសាកល្បង និងការមិនបោះបង់នៅពេលជួបបញ្ហា។</p>
+      <p data-i18n="aboutParagraph3">ទោះបីជាគេហទំព័រនេះមិនទាន់ល្អឥតខ្ចោះក៏ដោយ ក៏វាជាស្នាដៃតូចមួយដែលកើតចេញពីការខិតខំប្រឹងប្រែង និងការរៀនសូត្ររបស់ខ្ញុំផ្ទាល់។</p>
+      <p data-i18n="aboutParagraph4">សូមអរគុណចំពោះអ្នកដែលបានចំណាយពេលចូលមកទស្សនា និងគាំទ្រស្នាដៃតូចមួយនេះ។</p>
+      <p class="about-signature"><strong data-i18n="aboutSignature">ដោយក្តីគោរព និងអរគុណពីខ្ញុំបាទ វ៉ន ដារ៉ា។</strong></p>
+    </div>
+  </dialog>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
